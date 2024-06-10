@@ -1,0 +1,69 @@
+#include <iostream>
+#include <ctime>
+#include <cstdlib>
+#include <string>
+
+void generateSecretNumber(int secret[], int size) {
+    std::srand(std::time(0));
+    secret[0] = std::rand() % 9 + 1; 
+    for (int i = 1; i < size; ++i) {
+        secret[i] = std::rand() % 10;
+    }
+}
+
+void checkGuess(int secret[], int guess[], int size, int &bulls, int &cows) {
+    bulls = cows = 0;
+    for (int i = 0; i < size; ++i) {
+        if (secret[i] == guess[i]) {
+            ++bulls;
+        } else {
+            for (int j = 0; j < size; ++j) {
+                if (secret[i] == guess[j]) {
+                    ++cows;
+                    break;
+                }
+            }
+        }
+    }
+}
+
+void playGame(int secret[], int size, int attempts) {
+    int guess[size];
+    int bulls, cows;
+
+    std::cout << "Введіть свою догадку (чотирицифрове число без повторів цифр): ";
+    std::string input;
+    std::cin >> input;
+
+    if (input.length() != size) {
+        std::cout << "Неправильний формат числа! Введіть чотирицифрове число без повторів цифр.\n";
+        playGame(secret, size, attempts);
+        return;
+    }
+
+    for (int i = 0; i < size; ++i) {
+        guess[i] = input[i] - '0';
+    }
+
+    checkGuess(secret, guess, size, bulls, cows);
+
+    if (bulls == size) {
+        std::cout << "Ви вгадали число! Кількість спроб: " << attempts << std::endl;
+    } else {
+        std::cout << "Бики: " << bulls << ", Корови: " << cows << std::endl;
+        playGame(secret, size, attempts + 1);
+    }
+}
+
+int main() {
+    const int size = 4;
+    int secret[size];
+
+    generateSecretNumber(secret, size);
+
+    std::cout << "Вгадайте чотирицифрове число (цифри можуть повторюватись).\n";
+
+    playGame(secret, size, 1);
+
+    return 0;
+}
