@@ -1,0 +1,28 @@
+#include <iostream>
+#include <algorithm>
+
+void initializeMatrix(int matrix[][10], int n) {}
+
+void printMatrix(int matrix[][10], int n) {}
+
+void findMinMaxDiagonal(int matrix[][10], int n, int &minVal, int &maxVal) {}
+
+void sortRows(int matrix[][10], int n) {}
+
+int main() {
+    const int n = 5;
+    int matrix[10][10];
+
+    initializeMatrix(matrix, n);
+    printMatrix(matrix, n);
+
+    int minVal, maxVal;
+    findMinMaxDiagonal(matrix, n, minVal, maxVal);
+    std::cout << "Мінімальний елемент на головній діагоналі: " << minVal << std::endl;
+    std::cout << "Максимальний елемент на головній діагоналі: " << maxVal << std::endl;
+
+    sortRows(matrix, n);
+    printMatrix(matrix, n);
+
+    return 0;
+}
