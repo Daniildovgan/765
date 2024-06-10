@@ -1,0 +1,24 @@
+#include <iostream>
+#include <cmath>
+
+int binaryToDecimal(int binary) {
+    int decimal = 0;
+    int base = 1;
+
+    while (binary > 0) {
+        int lastDigit = binary % 10;
+        binary = binary / 10;
+        decimal += lastDigit * base;
+        base *= 2;
+    }
+
+    return decimal;
+}
+
+int main() {
+    int binaryNumber = 1010;
+    int decimalNumber = binaryToDecimal(binaryNumber);
+    std::cout << "Десяткове представлення числа: " << decimalNumber << std::endl;
+
+    return 0;
+}
