@@ -1,0 +1,22 @@
+#include <iostream>
+
+int gcd(int a, int b) {
+    if (b == 0) {
+        return a;
+    } else {
+        return gcd(b, a % b);
+    }
+}
+
+int main() {
+    int num1, num2;
+    std::cout << "Введіть перше число: ";
+    std::cin >> num1;
+    std::cout << "Введіть друге число: ";
+    std::cin >> num2;
+
+    int result = gcd(num1, num2);
+    std::cout << "Найбільший спільний дільник: " << result << std::endl;
+
+    return 0;
+}
